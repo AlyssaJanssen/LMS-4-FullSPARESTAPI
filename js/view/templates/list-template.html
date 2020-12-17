@@ -11,11 +11,11 @@
 </div>
 
 
-<table id="table" class="<%=view.viewModel.list.tableClasses%>"> 
+<table id="<%=view.viewModel.list.id%>" class="<%=view.viewModel.list.tableClasses%>"> 
   <tr class="trow">
     <!-- create the headers -->
     <% _.forEach(view.viewModel.fields, function(value, key){ 
-      if (value.name !="id" && value.list) {%>
+      if (value.list) {%>
       
     <th class="thead"><%=value.label%></th>
     <%}}) %>
@@ -24,24 +24,21 @@
 
   <!--TODO create the rows from the data-->
   <!-- You can utilize the getFieldValue function from 'view' to get the field display values-->
-
-    <!-- view.getFieldValue(fieldView, fieldData, true);
-    data[value.name] -->
- 
     <% _.forEach(view.viewModel.data, function(item, id){ %>
-      <tr id="<%=item.d%">
-        
-      <td class="td"><%=value.label%></td>
-      
-     
+      <tr id="<%=item.id%">
+        <% _.forEach(view.viewModel.fields, function(value, key){ 
+
+          if(value.list)
+            <td class="thead"><%=view.getFieldValue(value, item, false)%></td>
        <%}}) %>
+
+       `<i id="edit-<%item.id%>"   class='actionButton fa fa-edit' >Edit</i>`
+       `<i id="delete-<%item.id%>" class='actionButton fa fa-delet' >Delete</i>`
+       `<i id="info-<%item.id%>"   class='actionButton fa fa-info' >Info</i>`
+
       </tr>
 
-      <td class="td">
-        `<button type="button" id="editBtn-<$team.id%>">Edit</button>`
-        `<button type="button" id="deleteBtn-<$team.id%>">Delete</button>`
-        `<button type="button" id="infoBtn-<$team.id%>">Info</button>`
-         </td>
-       {%>
+    <%});%>>
+   
 
 </table>

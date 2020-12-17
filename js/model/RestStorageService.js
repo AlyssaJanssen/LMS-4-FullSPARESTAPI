@@ -45,7 +45,7 @@ class RestStorageService {
 
     let url = `http://${this.apiHostURL}/${apiName}/${this.getQueryString(options)}`;
 
-    let data = await $.ajax({   ///-------------API DATA
+    let data = await $.ajax({   ///-------------API call
       type: 'GET',
       url: url,
       async: true,
@@ -72,19 +72,16 @@ class RestStorageService {
     //   res.json(id);
     //  });
 
-
-     let url = `http://${this.apiHostURL}/${apiName}/${this.getQueryString(options)}`;
+     let url = `http://${this.apiHostURL}/${apiName}/${id}/${this.getQueryString(options)}`; // url adding id
 
      let data = await $.ajax({   ///-------------API DATA BEING CALLED
        type: 'GET',
        url: url,
        async: true,
-       data: data,
        contentType: "application/json",
        dataType: "json"
      });
 
-////////////////
   //returns the item in the array with id=getId, null if it is not found. returning actual object
   //return this.model.data.find((d) => d.id === getId);
 
@@ -97,25 +94,38 @@ class RestStorageService {
     //TODO - call api to update item
     //return updated object
     // update item with id
-    id.put(function(req, res) {
 
-      postData.findById(req.params.id, function(err, postData) {
 
-          if (err)
-              res.send(err);
+    let url = `http://${this.apiHostURL}/${apiName}/${id}/${this.getQueryString(options)}`; // url adding id
 
-          this.postData = req.body.postData;  // update info
+    let postData = await $.ajax({   ///-------------API DATA BEING CALLED
+      type: 'PUT',
+      url: url,
+      async: true,
+      data: postData,
+      contentType: "application/json",
+      dataType: "json"
+    });
 
-          // save the item
-          postData.save(function(err) {
-              if (err)
-                  res.send(err);
+  //   id.put(function(req, res) {
 
-              res.json({ message: 'Item updated!' });
-          });
+  //     postData.findById(req.params.id, function(err, postData) {
 
-      });
-  });
+  //         if (err)
+  //             res.send(err);
+
+  //         this.postData = req.body.postData;  // update info
+
+  //         // save the item
+  //         postData.save(function(err) {
+  //             if (err)
+  //                 res.send(err);
+
+  //             res.json({ message: 'Item updated!' });
+  //         });
+
+  //     });
+  // });
 
   }
 
@@ -123,22 +133,31 @@ class RestStorageService {
     //TODO-call api to create a new item
     //return new object (with new db id)
 
-    postData.post(function(req, res) {
+    let url = `http://${this.apiHostURL}/${apiName}/${this.getQueryString(options)}`; // url adding id
 
-      var item = new TeamView();      // create a new instance of the model
-      item.name = req.body.name;  // set the items name (comes from the request)
+    let postData = await $.ajax({   ///-------------API DATA BEING CALLED
+      type: 'PUT',
+      url: url,
+      async: true,
+      data: postData,
+      contentType: "application/json",
+      dataType: "json"
+    });
 
-      // save the bear and check for errors
-      item.save(function(err) {
-          if (err)
-              res.send(err);
+  //   postData.post(function(req, res) {
 
-          res.json({ message: 'Item created!' });
-      });
+  //     var item = new TeamView();      // create a new instance of the model
+  //     item.name = req.body.name;  // set the items name (comes from the request)
 
-  });
+  //     // save the bear and check for errors
+  //     item.save(function(err) {
+  //         if (err)
+  //             res.send(err);
 
+  //         res.json({ message: 'Item created!' });
+  //     });
 
+  // });
 
           //append new object to data store
       // persist in local storage by calling store()
@@ -149,17 +168,31 @@ class RestStorageService {
 
   async delete(id)  // this was called remove() in LMS2
   {
-      //   //TODO-call api to remove item
-    id.delete(function(req, res) {
-      id.remove({
-          _id: req.params.id
-      }, function(err, id) {
-          if (err)
-              res.send(err);
 
-          res.json({ message: 'Successfully deleted' });
-      });
-  });
+
+    let url = `http://${this.apiHostURL}/${apiName}/${id}/${this.getQueryString(options)}`; // url adding id
+
+    let data = await $.ajax({   ///-------------API DATA BEING CALLED
+      type: 'DELETE',
+      url: url,
+      async: true,
+      data: data,
+      contentType: "application/json",
+      dataType: "json"
+    });
+
+
+  //     //   //TODO-call api to remove item
+  //   id.delete(function(req, res) {
+  //     id.remove({
+  //         _id: req.params.id
+  //     }, function(err, id) {
+  //         if (err)
+  //             res.send(err);
+
+  //         res.json({ message: 'Successfully deleted' });
+  //     });
+  // });
     
   
     

@@ -56,9 +56,9 @@ class View   //----------(shared functions, including form validation)
              //attach a listener to each button with id 'delete1', 'delete2' etc..
                                                                 // click event handler 
                                                                      //call my class deleteListItem, passing the player.id
-             $(document).on("click", "#deleteBtn" + val.id, () => {  that.deleteListItem(val.id);  });
-             $(document).on("click", "#editBtn" + val.id, () => {  that.renderForm(val.id);  });
-             $(document).on("click", "#infoBtn" + val.id, () => {  that.showInfo(val.id);  });
+             $(document).on("click", "#delete" + val.id, () => {  that.deleteListItem(val.id);  });
+             $(document).on("click", "#edit" + val.id, () => {  that.renderForm(val.id);  });
+             $(document).on("click", "#info" + val.id, () => {  that.showInfo(val.id);  });
         });
 
     }
