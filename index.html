@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Teams</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+
+    <base href="/">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+
+    <!-- font awesome cdn -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+    <!-- animate CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+
+    <!-- ----MY css file -->
+    <link rel="stylesheet" href="css/main.css">
+
+</head>
+
+<body>
+    
+
+    <div>
+        <nav class="navbar navbar-inverse black">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#"><strong>Team Home Page</strong></a>
+                </div>
+                <ul class="nav navbar-nav">
+                    <li><button type='button' class="btn btn-info" a href="#">Players</a></li></button>
+                    <li class="active"><button type='button' class="btn btn-info"a href="#">Teams</a></li></button>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+   
+
+    <div class="white ">
+        <img class="animate__animated animate__shakeY animate__fadeInRightBig " src="img/RollerDerbyLogo.png"
+            alt="logo" />
+        <h1 class="animate__animated  animate__fadeInUpBig"><strong>Roller Derby Teams</strong></h1>
+    </div>
+
+    <div class="container-fluid">
+
+    <div class ="blockquote border-info align-top animate__lightSpeedInRight   ">
+        <aside>
+            <p>Roller derby is a skating contact sport played by two teams of fifteen members.
+                Game play consists of a series of short scrimmages (jams). Both teams designate a jammer. The jammer
+                scores points by lapping members of the opposing team. The teams attempt to hinder the opposing jammer
+                while assisting their own.</p>
+        </aside>
+    </div>
+
+    
+    <div class=" black container">
+        
+            <div class="container left">  
+                <input type="text" class="rounded-pill"  id="searchInput" onkeyup="searchTeam()" placeholder="Search for teams" > 
+                <button id="searchBtn"onclick="searchTeam()" i class="fas fa-search"></i></button>
+            </div>
+
+            <div>
+                <button type='button' class="btn btn-primary" data-toggle='modal' data-target='#editModal' onclick="addTeam()">Add Team <i class="fas fa-plus-square"></i></button>
+            </div>
+
+        <div class="">
+            <div class="col-sm-12">
+                <div class="table-responsive" id="tableContainer">
+                  
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+        <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal">
+            Edit Team
+        </button>  -->
+
+        <!-- Modal -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+            <div class="modal-dialog " role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalLabel"> Edit Team</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+
+                    <div class="modal-body">
+                        <form name = "editForm" id="editForm" class="needs-validation" method="GET" novalidate>
+
+                            <div class="form-group">
+                                <label for="inputTeamID">Team ID</label>
+                                <input type="number" name="teamID" class="form-control" id="teamID"
+                                    aria-describedby="teamHelp" placeholder="Please Enter your Team ID" >
+                                <div class="invalid-feedback">
+                                    Please enter a valid Team ID
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputTeamName">Team Name</label>
+                                <input type="text" name="teamName" class="form-control" id="teamName"
+                                    aria-describedby="teamHelp" placeholder="Please Enter your Team Name" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid Team Name
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputCoach">Coach Name</label>
+                                <input type="text" name="coachName" class="form-control" id="coachName"
+                                    aria-describedby="coachHelp" placeholder="Please Enter Coaches Name" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid First name
+                                </div>
+
+
+                                <label for="inputCoach">Coach City</label>
+                                <input type="text" name="city" class="form-control" id="city"
+                                    aria-describedby="coachHelp" placeholder="Please Enter your Coaches City" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid City
+                                </div>
+
+                                <label for="inputCoach">Coach State</label>
+                                <input type="text" name="state" class="form-control" id="state"
+                                    aria-describedby="coachHelp" placeholder="Please Enter your Coaches State" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid State
+                                </div>
+
+                                <label for="inputCoach">Coach Zip Code</label>
+                                <input type="text" name="zip" class="form-control" id="zip" aria-describedby="coachHelp"
+                                    placeholder="Please Enter your Coaches Zip Code" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid Zip Code
+                                </div>
+
+                                <label for="inputCoach">Coach Email</label>
+                                <input type="email" name="email" class="form-control" id="email"
+                                    aria-describedby="coachHelp" placeholder="Please Enter your Coaches Email" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid Email
+                                </div>
+
+                                <label for="inputCoach">Coach Phone Number</label>
+                                <input type="string" name="phone" class="form-control validator" id="phone"
+                                    aria-describedby="coachHelp" placeholder="Please Enter your Coaches Phone" required>
+                                <div class="invalid-feedback">
+                                    Please enter a valid Phone Number
+                                </div>
+
+
+
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary" onclick="initValidation(id)">Submit</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+        <div class="footer">
+        <footer class="footer black align-bottom align-baseline ">©Alyssa Janssen 2020</footer>
+        </div>
+
+        <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
+
+    <script src="js/model/RestStorageService.js"></script>
+
+    <script src="js/teamData.js"></script>
+    <script src="js/localStorageService.js"></script>
+    <script src="js/view.js"></script>
+    <script src="js/validation.js"></script>
+    <script src="js/controller.js"></script>
+    <script src="js/AppController.js "></script>
+    <script src="js/view/View.js "></script>
+    <script src="js/View/PlayerView.js"></script>
+    <script src="js/View/TeamView.js"></script>
+
+</body>
+
+</html>
