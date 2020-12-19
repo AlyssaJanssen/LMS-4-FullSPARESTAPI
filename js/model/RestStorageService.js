@@ -91,22 +91,23 @@ class RestStorageService {
   
 
   async update(id, postData) {
-    //TODO - call api to update item
+    //TODO - call api to update item----EDIT
     //return updated object
     // update item with id
 
 
     let url = `http://${this.apiHostURL}/${apiName}/${id}/${this.getQueryString(options)}`; // url adding id
 
-    let postData = await $.ajax({   ///-------------API DATA BEING CALLED
+    let data = await $.ajax({   ///-------------API DATA BEING CALLED
       type: 'PUT',
       url: url,
       async: true,
-      data: postData,
-      contentType: "application/json",
-      dataType: "json"
+      data: postData
+      //contentType: "application/json",
+     // dataType: "json"
     });
 
+    return data;
   //   id.put(function(req, res) {
 
   //     postData.findById(req.params.id, function(err, postData) {
@@ -130,20 +131,21 @@ class RestStorageService {
   }
 
   async create(postData) {
-    //TODO-call api to create a new item
+    //TODO-call api to create a new item --------CREATING EMPTY FORM WITH EMPTY ID
     //return new object (with new db id)
 
     let url = `http://${this.apiHostURL}/${apiName}/${this.getQueryString(options)}`; // url adding id
 
-    let postData = await $.ajax({   ///-------------API DATA BEING CALLED
+    let data = await $.ajax({   ///-------------API DATA BEING CALLED
       type: 'PUT',
       url: url,
       async: true,
-      data: postData,
-      contentType: "application/json",
-      dataType: "json"
+      data: postData
+      //contentType: "application/json",
+     // dataType: "json"
     });
 
+    return data;
   //   postData.post(function(req, res) {
 
   //     var item = new TeamView();      // create a new instance of the model

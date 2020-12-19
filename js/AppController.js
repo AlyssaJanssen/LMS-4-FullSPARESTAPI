@@ -1,15 +1,5 @@
 
 
-$("document").ready(function () {
-
-
-     // var controller = new AppController(playerViewModel, teamViewModel,// --new entry point to instantiate appService
-     //     "tableContainer", "editForm", "localhost:8080"); //-----changed from 8081
-     // controller.renderTeamListView();
-     
-})
-
-
 
 
 class AppController

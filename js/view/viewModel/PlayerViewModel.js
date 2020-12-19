@@ -1,21 +1,21 @@
-var playerViewModel = {
+var playerViewModel= {
     list: {
         //You can use these as default options for your calls to your REST Service 'list' function
         options: {
-            sort_col: "first_name",
-            sort_dir: "asc",
+            sort_col:"first_name",
+            sort_dir:"asc",
             limit: null,
-            offset: null,
+            offset:null,
             filter_col: null,
             filter_str: null,
-            is_lookup: null,
-            alt_table: null
-        },
+            is_lookup:null,
+            alt_table:null       
+            },
         listButtonId: "playerButton",   //button id for players list, use while rendering list dynamically
         listTitle: "Player List",    //title above list
-        templateUrl: "js/views/templates/list-template.html",  //path to lodash template
+        templateUrl: "js/view/templates/list-template.html",  //path to lodash template
         id: "player-list",     //table id if needed
-        tableClasses: "table table-striped table-dark"   //bootstrap classes to apply to my table
+        tableClasses:"table table-striped table-dark"   //bootstrap classes to apply to my table
     },
     //The following can be used in rendering your form (OPTIONAL)
     //dynamic rendering via lodash is recommended, but not required for the final
@@ -23,10 +23,10 @@ var playerViewModel = {
         id: "my-form",
         addFormTitle: "Add Player",
         createFormTitle: "Create Player",
-        actionUrl: "",
+        actionUrl:"",
         method: "POST",
         suppressSubmit: true,
-        templateUrl: "js/views/templates/formTemplate.html"
+        templateUrl: "js/view/templates/formTemplate.html"
     },
     //Meta data for fields.  You can use for rendering your list dynamically.
     //if 'list' is true, then you should render this field in your list
@@ -61,7 +61,7 @@ var playerViewModel = {
             label: "Team",
             name: "team_id",
             inputType: "select",
-            list: true,
+            list:true,
             placeholder: "Select a Team",
             //lookupName is the table you will be using on the backend to return a list of 'options' for your
             //select box

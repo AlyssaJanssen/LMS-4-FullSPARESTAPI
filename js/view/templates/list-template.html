@@ -25,20 +25,21 @@
   <!--TODO create the rows from the data-->
   <!-- You can utilize the getFieldValue function from 'view' to get the field display values-->
     <% _.forEach(view.viewModel.data, function(item, id){ %>
-      <tr id="<%=item.id%">
+      <tr id="<%=item.id%>" >
         <% _.forEach(view.viewModel.fields, function(value, key){ 
 
-          if(value.list)
+          if(value.list)  {%>
             <td class="thead"><%=view.getFieldValue(value, item, false)%></td>
        <%}}) %>
 
-       `<i id="edit-<%item.id%>"   class='actionButton fa fa-edit' >Edit</i>`
-       `<i id="delete-<%item.id%>" class='actionButton fa fa-delet' >Delete</i>`
-       `<i id="info-<%item.id%>"   class='actionButton fa fa-info' >Info</i>`
-
+       <td>
+       <i id="edit-<%item.id%>"   class='actionButton fa fa-edit' >Edit</i>
+       <i id="delete-<%item.id%>" class='actionButton fa fa-delete' >Delete</i>
+       <i id="info-<%item.id%>"   class='actionButton fa fa-info' >Info</i>
+      </td>
       </tr>
 
-    <%});%>>
+    <%});%>
    
 
 </table>

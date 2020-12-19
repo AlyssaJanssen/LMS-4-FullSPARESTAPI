@@ -6,6 +6,8 @@ class View   //----------(shared functions, including form validation)
         this.viewModel = viewModel;
         this.listContainerId=listContainerId;
         this.formContainerId = formContainerId;
+        this.initValidation();
+
     }
 
     get $form() {   //getter for jquery wrapped form object
@@ -130,4 +132,161 @@ class View   //----------(shared functions, including form validation)
           });
          
     }
+
+
+
+     initValidation(formName){
+        let that = this;
+        var formEl = $(formName);
+       //Add submit handler for the named form.  Param should be passed with "#" preappended
+       formEl.submit(function(event) {
+          
+          that.validateForm();
+          
+          var formValid = this.checkValidity();
+        
+            event.preventDefault();
+            event.stopPropagation();
+            
+          $(this).addClass('was-validated');
+    
+          if(formValid){
+            that.handleFormSubmit(this);
+            
+          }
+        
+      });
+      
+      $(formName+" input").on("change",function (event) {
+          'use strict';
+       
+          that.validateForm();
+          $(this).addClass('was-validated');
+      });
+     
+    }
+    
+     validateForm()
+    {
+        //checkRequired("#teamID", "Team ID is Required");
+        //checkRequired("#teamName", "Team Name is Required");
+    
+    }
+    
+     checkRequired(fieldName, message)
+    {
+        let that = this;
+      var el = $(fieldName).get(0);
+      if ($(fieldName).val()) {
+        
+          el.setCustomValidity('');  //sets to no error message and field is valid
+      } else {
+         
+          el.setCustomValidity(message);   //sets error message and field gets 'invalid' state
+          var errDivName = fieldName+"Err";
+          $(errDivName).text(el.validationMessage);
+      }
+      that.formValidated();
+      return $(el).val().length>0?true:false;
+    }
+
+     formValidated(){
+       $(".needs-validation").addClass('was-validated');
+    }
+
+
+
+
+
+     sortBtnClick(name) {
+
+        this.storage.sort(['name'], ['asc'], true);
+        // re render sorted table
+        renderTable("#tableContainer", this.storage.list());
+    }
+    
+     searchTeam() {
+    
+    
+        let searchInput = document.getElementById("searchInput").value;
+        //$searchInput.serializeArray(); //jquery takes data, sticks into object
+    
+        //this.storage.filter({ 'name': $searchInput });
+        let filteredResults = this.storage.filter({ name: searchInput });
+        // re render sorted table
+        renderTable("#tableContainer", filteredResults);
+    }
+    
+    
+     onDeleteBtnClick(id) {
+        confirm("Are you sure you want to delete this team?");
+    
+        this.storage.remove(id); // delete from model data
+        this.renderList();
+    
+    }
+    
+     editBtnClick(id) {
+    
+        //localStorage.get(id) to get the item to edit
+        teamRow = this.storage.getItem(id);
+        //copy the values from the object into your form inputs
+        // document.forms['editForm'].elements['teamID'].value = teamRow.id;
+        // document.forms['editForm'].elements['teamName'].value = teamRow.name; // IT WORKED WOOOOO!
+        // document.forms['editForm'].elements['coachName'].value = teamRow.coachName; 
+        // document.forms['editForm'].elements['phone'].value = teamRow.phone; 
+        // document.forms['editForm'].elements['city'].value = teamRow.city; 
+        // document.forms['editForm'].elements['state'].value = teamRow.state; 
+        // document.forms['editForm'].elements['zip'].value = teamRow.zip; 
+        // document.forms['editForm'].elements['email'].value = teamRow.email; 
+    
+        // populate form inputs with model data
+        $("#teamId").val(teamRow.id);
+        $("#teamName").val(teamRow.name);
+        $("#coachName").val(teamRow.coachName);
+        $("#phone").val(teamRow.phone);
+        $("#city").val(teamRow.city);
+        $("#state").val(teamRow.state);
+        $("#zip").val(teamRow.zip);
+        $("#email").val(teamRow.email);
+    
+        //  let teamId = $("#teamId").val();  
+    }
+    
+     handleFormSubmit(form) {
+    
+        // then you need to save all values from edit Input
+        teamRow.name = $("#teamName").val();
+        teamRow.coachName = $("#coachName").val();
+        teamRow.phone = $("#phone").val();
+        teamRow.city = $("#city").val();
+        teamRow.state = $("#state").val();
+        teamRow.zip = $("#zip").val();
+        teamRow.email = $("#email").val();
+    
+        if (teamRow.id != null) // if team is  being EDITED, update in model
+        {
+            this.storage.update(teamRow); // updates the model data with new edit Input
+            teamRow.id = $("#teamID").val();
+        }
+        else  // ID is null so this is a new Team being added, call create to add to model data
+        {
+            this.storage.create(teamRow); /// create adds the new object to storage
+    
+            //Re render the list using localStorage.list() to get the data.
+        }
+        this.renderList(); // re render table with new data row added
+    
+        // then close the modal
+        $('#editModal').modal('hide');
+    }
+    
+     addTeam(id) {
+        // the add team button click pops up modal and calls this to set id to null
+        teamRow = {
+            id: null,
+    
+        };
+        // then they click submit which calls the submit func then handleFormSubmit() above
+     }
 }
